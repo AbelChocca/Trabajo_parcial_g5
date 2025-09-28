@@ -8,9 +8,6 @@
     <Filter Include="core">
       <UniqueIdentifier>{a6219e1a-35d9-407d-b936-a025215212ca}</UniqueIdentifier>
     </Filter>
-    <Filter Include="input">
-      <UniqueIdentifier>{0e45f0b9-e4fe-43aa-a981-eb59c6a60e8d}</UniqueIdentifier>
-    </Filter>
     <Filter Include="menu">
       <UniqueIdentifier>{05266977-4183-4aaa-8b6c-391ede6f04b6}</UniqueIdentifier>
     </Filter>
@@ -20,13 +17,13 @@
     <Filter Include="assets">
       <UniqueIdentifier>{b75d6571-a3f7-4eef-bc02-2a0eb8c294f7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="selector">
+      <UniqueIdentifier>{bbc071b1-dc7d-4a3f-97f6-c6cf01a2f848}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Game.cpp">
       <Filter>core</Filter>
-    </ClCompile>
-    <ClCompile Include="InputHandler.cpp">
-      <Filter>input</Filter>
     </ClCompile>
     <ClCompile Include="Menu.cpp">
       <Filter>menu</Filter>
@@ -40,13 +37,13 @@
     <ClCompile Include="Config.cpp">
       <Filter>core</Filter>
     </ClCompile>
+    <ClCompile Include="selector.cpp">
+      <Filter>selector</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
       <Filter>core</Filter>
-    </ClInclude>
-    <ClInclude Include="InputHandler.h">
-      <Filter>input</Filter>
     </ClInclude>
     <ClInclude Include="Menu.h">
       <Filter>menu</Filter>
@@ -57,12 +54,27 @@
     <ClInclude Include="Map.h">
       <Filter>core</Filter>
     </ClInclude>
+    <ClInclude Include="Selector.h">
+      <Filter>selector</Filter>
+    </ClInclude>
+    <ClInclude Include="GameState.h">
+      <Filter>core</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="menu.txt">
       <Filter>assets</Filter>
     </Text>
     <Text Include="fondo_menu.txt">
+      <Filter>assets</Filter>
+    </Text>
+    <Text Include="input_handler.txt">
+      <Filter>assets</Filter>
+    </Text>
+    <Text Include="selector.txt">
+      <Filter>assets</Filter>
+    </Text>
+    <Text Include="input_selector.txt">
       <Filter>assets</Filter>
     </Text>
   </ItemGroup>

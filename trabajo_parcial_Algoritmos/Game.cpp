@@ -2,11 +2,14 @@
 
 Game::Game() {
     running = true;
-    menu = new Menu();
+    currentState = new Menu();
 }
 
 Game::~Game() {
-    delete menu;
+    delete currentState;
+}
+GameState* Game::getState() {
+    return this->currentState;
 }
 
 void Game::iniciar() {
@@ -15,30 +18,38 @@ void Game::iniciar() {
     config::SetupEncoding();
     config::basicConfig();
 
-    // Renderizar menú solo una vez
-    menu->mostrar();
+    this->render();
 
     while (running) {
-        update();   // solo procesa input
-        Sleep(100);
+        if (_kbhit()) {
+            char tecla = _getch();
+            currentState->handleInput(this, tecla);
+            Sleep(100);
+        }
     }
 }
 
 void Game::render() {
     Console::Clear();
 
-    // Renderizar el menú
-    if (menu) {
-        menu->mostrar();
+    if (currentState) {
+        currentState->mostrar();
     }
 }
 
 void Game::update() {
-    if (_kbhit()) {
-        char tecla = _getch();
+    if (currentState) {
+        currentState->update();
     }
 }
 
 void Game::salir() {
     running = false;
+}
+
+void Game::setState(GameState* newState) {
+    if (currentState) delete currentState;
+    this->currentState = newState;
+
+    if (currentState) currentState->mostrar();
 }
