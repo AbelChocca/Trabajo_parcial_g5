@@ -1,5 +1,5 @@
 ﻿#include "Selector.h"
-#include "Game.h"
+#include "../core/Game.h"
 
 Tile SelectorCharToTile(char c);
 Tile InputSelectorCharToTile(char c);

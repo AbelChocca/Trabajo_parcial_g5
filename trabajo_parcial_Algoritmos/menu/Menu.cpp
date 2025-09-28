@@ -1,6 +1,6 @@
-﻿#include "Game.h"
+﻿#include "../core/Game.h"
 #include <conio.h>
-#include "Selector.h"
+#include "../selector/Selector.h"
 
 Tile MenuCharToTile(char c);
 Tile InputCharToTile(char c);
@@ -8,9 +8,9 @@ Tile InputCharToTile(char c);
 Menu::Menu() {
 
     layout = new EstructuraEstatica(0, 0);
-    layout->loadMap("menu.txt", MenuCharToTile);
+    layout->loadMap("../assets/menu.txt", MenuCharToTile);
     input = new EstructuraDinamica(POSX_INPUT, POSY_INPUT, layout);
-    input->loadMap("input_handler.txt", InputCharToTile);
+    input->loadMap("../assets/input_handler.txt", InputCharToTile);
     opcionSeleccionada = 0;
 }
 

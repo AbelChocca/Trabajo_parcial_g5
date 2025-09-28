@@ -1,6 +1,6 @@
 #pragma once
-#include "Map.h"
-#include "GameState.h"
+#include "../core/Map.h"
+#include "../core/GameState.h"
 
 const int POSY_INPUT = 22;
 const int POSX_INPUT = 39;

@@ -111,27 +111,26 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Config.cpp" />
-    <ClCompile Include="Game.cpp" />
-    <ClCompile Include="main.cpp" />
-    <ClCompile Include="Map.cpp" />
-    <ClCompile Include="Menu.cpp" />
-    <ClCompile Include="selector.cpp" />
+    <ClCompile Include="core\Config.cpp" />
+    <ClCompile Include="core\Game.cpp" />
+    <ClCompile Include="core\main.cpp" />
+    <ClCompile Include="core\Map.cpp" />
+    <ClCompile Include="menu\Menu.cpp" />
+    <ClCompile Include="selector\selector.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Config.h" />
-    <ClInclude Include="Game.h" />
-    <ClInclude Include="GameState.h" />
-    <ClInclude Include="Map.h" />
-    <ClInclude Include="Menu.h" />
-    <ClInclude Include="Selector.h" />
+    <ClInclude Include="core\Config.h" />
+    <ClInclude Include="core\Game.h" />
+    <ClInclude Include="core\GameState.h" />
+    <ClInclude Include="core\Map.h" />
+    <ClInclude Include="menu\Menu.h" />
+    <ClInclude Include="selector\Selector.h" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="fondo_menu.txt" />
-    <Text Include="input_handler.txt" />
-    <Text Include="input_selector.txt" />
-    <Text Include="menu.txt" />
-    <Text Include="selector.txt" />
+    <Text Include="assets\input_handler.txt" />
+    <Text Include="assets\input_selector.txt" />
+    <Text Include="assets\menu.txt" />
+    <Text Include="assets\selector.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -1,5 +1,5 @@
 #pragma once
-#include "GameState.h"
+#include "../core/GameState.h"
 class EstructuraEstatica;
 class EstructuraDinamica;
 
