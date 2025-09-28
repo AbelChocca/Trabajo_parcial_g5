@@ -1,0 +1,10 @@
+***********************************************************
+*                                                         *
+*  Bienvenido al mundo del Puente del Futuro!             *
+*                                                         *
+*  Este dialogo servira para dar un mejor contexto sobre  *
+*  el mundo antes de empezar a jugarlo.                   *
+*                                                         *
+*                                              ENTER ->   *
+*                                                         *
+***********************************************************

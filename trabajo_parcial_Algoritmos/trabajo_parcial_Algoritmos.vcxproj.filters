@@ -1,0 +1,113 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="core\Game.cpp">
+      <Filter>core</Filter>
+    </ClCompile>
+    <ClCompile Include="core\Config.cpp">
+      <Filter>core</Filter>
+    </ClCompile>
+    <ClCompile Include="core\main.cpp">
+      <Filter>core</Filter>
+    </ClCompile>
+    <ClCompile Include="core\Map.cpp">
+      <Filter>core</Filter>
+    </ClCompile>
+    <ClCompile Include="menu\Menu.cpp">
+      <Filter>menu</Filter>
+    </ClCompile>
+    <ClCompile Include="selector\selector.cpp">
+      <Filter>selector</Filter>
+    </ClCompile>
+    <ClCompile Include="levels\level3\mundo3.cpp">
+      <Filter>levels\level3</Filter>
+    </ClCompile>
+    <ClCompile Include="levels\level3\mundo3_e1.cpp">
+      <Filter>levels\level3</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="core\GameState.h">
+      <Filter>core</Filter>
+    </ClInclude>
+    <ClInclude Include="core\Config.h">
+      <Filter>core</Filter>
+    </ClInclude>
+    <ClInclude Include="core\Game.h">
+      <Filter>core</Filter>
+    </ClInclude>
+    <ClInclude Include="core\Map.h">
+      <Filter>core</Filter>
+    </ClInclude>
+    <ClInclude Include="menu\Menu.h">
+      <Filter>menu</Filter>
+    </ClInclude>
+    <ClInclude Include="selector\Selector.h">
+      <Filter>selector</Filter>
+    </ClInclude>
+    <ClInclude Include="levels\level3\mundo3.h">
+      <Filter>levels\level3</Filter>
+    </ClInclude>
+    <ClInclude Include="levels\level3\mundo3_e1.h">
+      <Filter>levels\level3</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="assets\ia_sprite1.txt">
+      <Filter>assets</Filter>
+    </Text>
+    <Text Include="assets\input_handler.txt">
+      <Filter>assets</Filter>
+    </Text>
+    <Text Include="assets\ia_sprite2.txt">
+      <Filter>assets</Filter>
+    </Text>
+    <Text Include="assets\input_selector.txt">
+      <Filter>assets</Filter>
+    </Text>
+    <Text Include="assets\menu.txt">
+      <Filter>assets</Filter>
+    </Text>
+    <Text Include="assets\personaje_sprite1.txt">
+      <Filter>assets</Filter>
+    </Text>
+    <Text Include="assets\personaje_sprite2.txt">
+      <Filter>assets</Filter>
+    </Text>
+    <Text Include="assets\personaje_sprite3.txt">
+      <Filter>assets</Filter>
+    </Text>
+    <Text Include="assets\selector.txt">
+      <Filter>assets</Filter>
+    </Text>
+    <Text Include="assets\mundo3_e1.txt">
+      <Filter>assets</Filter>
+    </Text>
+    <Text Include="assets\mundo3_e2.txt">
+      <Filter>assets</Filter>
+    </Text>
+    <Text Include="assets\mundo3_dialogo1.txt">
+      <Filter>assets</Filter>
+    </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="core">
+      <UniqueIdentifier>{09afd096-842e-4624-a0b7-954608ac262b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="assets">
+      <UniqueIdentifier>{766c34eb-651b-4db0-a6b9-e8f92839f82d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="menu">
+      <UniqueIdentifier>{82a3c73e-0e10-4f38-9ac5-19d5c1430e9e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="levels">
+      <UniqueIdentifier>{18c12d33-c2df-4529-a1a0-786e2733b3ed}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="levels\level3">
+      <UniqueIdentifier>{4412dd71-8658-4350-85ea-531855c5fdf5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="selector">
+      <UniqueIdentifier>{4cac3c7f-649f-4650-8438-d865f2d2d128}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

@@ -1,6 +1,7 @@
 #pragma once
 
 class Game;
+class EstructuraEstatica;
 
 class GameState
 {
