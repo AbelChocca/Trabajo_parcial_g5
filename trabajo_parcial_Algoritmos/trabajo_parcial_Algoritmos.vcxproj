@@ -113,21 +113,25 @@
   <ItemGroup>
     <ClCompile Include="Config.cpp" />
     <ClCompile Include="Game.cpp" />
-    <ClCompile Include="InputHandler.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Map.cpp" />
     <ClCompile Include="Menu.cpp" />
+    <ClCompile Include="selector.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Config.h" />
     <ClInclude Include="Game.h" />
-    <ClInclude Include="InputHandler.h" />
+    <ClInclude Include="GameState.h" />
     <ClInclude Include="Map.h" />
     <ClInclude Include="Menu.h" />
+    <ClInclude Include="Selector.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="fondo_menu.txt" />
+    <Text Include="input_handler.txt" />
+    <Text Include="input_selector.txt" />
     <Text Include="menu.txt" />
+    <Text Include="selector.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

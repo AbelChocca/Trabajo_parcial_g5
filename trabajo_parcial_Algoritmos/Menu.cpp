@@ -1,11 +1,16 @@
-﻿#include "Menu.h"
+﻿#include "Game.h"
+#include <conio.h>
+#include "Selector.h"
 
 Tile MenuCharToTile(char c);
+Tile InputCharToTile(char c);
 
 Menu::Menu() {
-    layout = new Estructura(0, 0);
+
+    layout = new EstructuraEstatica(0, 0);
     layout->loadMap("menu.txt", MenuCharToTile);
-    input = new InputHandler();
+    input = new EstructuraDinamica(POSX_INPUT, POSY_INPUT, layout);
+    input->loadMap("input_handler.txt", InputCharToTile);
     opcionSeleccionada = 0;
 }
 
@@ -17,23 +22,42 @@ Menu::~Menu() {
 void Menu::mostrar() {
     Console::Clear();
 
-    // Renderizar el menú desde el archivo
     if (layout) {
         layout->render();
     }
-
-    // leer input
-    if (_kbhit()) {
-        char tecla = _getch();
-        if (tecla == '1') opcionSeleccionada = 1;
-        else if (tecla == '2') opcionSeleccionada = 2;
-        else if (tecla == '3') opcionSeleccionada = 3;
+    if (this->input) {
+        this->input->render();
+    }
+}
+void Menu::update() {
+    if (layout) {
+        layout->render();
     }
 }
 
-
-int Menu::getOpcion() {
-    return opcionSeleccionada;
+void Menu::handleInput(Game* game, char c) {
+    if (c == '1') {
+        this->input->borrar();
+        this->input->setPosY(22);
+        this->setOpcion(0);
+    }
+    else if (c == '2') {
+        this->input->borrar();
+        this->input->setPosY(32);
+        this->setOpcion(1);
+    }
+    else if (c == '3') {
+        this->input->borrar();
+        this->input->setPosY(42);
+        this->setOpcion(2);
+    }
+    else if (c == 13) {
+        if (this->getOpcion() == 0) {
+            game->setState(new Selector());
+            return;
+        }
+    }
+    this->getInput()->render();
 }
 
 Tile MenuCharToTile(char c) {
@@ -41,17 +65,44 @@ Tile MenuCharToTile(char c) {
 
     switch (c) {
     case '#':
+    case '0':
         t.bloque = L'█';
         t.color = ConsoleColor::White;
         break;
 
-    case '*': 
+    case '*':
         t.bloque = L'█';
         t.color = ConsoleColor::DarkBlue;
+        break;
+    case '=':
+    case '1':
+    case '3':
+        t.bloque = L'█';
+        t.color = ConsoleColor::DarkGray;
+        break;
+    case '2':
+        t.bloque = L'█';
+        t.color = ConsoleColor::DarkCyan;
+        break;
+    case '4':
+        t.bloque = L'█';
+        t.color = ConsoleColor::Gray;
         break;
     case ' ':
         t.bloque = L' ';
         t.color = ConsoleColor::Black;
+        break;
+    case '5':
+        t.bloque = L'█';
+        t.color = ConsoleColor::Magenta;
+        break;
+    case '6':
+        t.bloque = L'█';
+        t.color = ConsoleColor::DarkMagenta;
+        break;
+    case '7':
+        t.bloque = L'█';
+        t.color = ConsoleColor::DarkRed;
         break;
     default:
         t.bloque = c;
@@ -59,5 +110,24 @@ Tile MenuCharToTile(char c) {
         break;
     }
 
+    return t;
+}
+Tile InputCharToTile(char c) {
+    Tile t;
+
+    switch (c)
+    {
+    case '*':
+        t.bloque = L'█';
+        t.color = ConsoleColor::White;
+        break;
+    case ' ':
+        t.bloque = L' ';
+        t.color = ConsoleColor::Black;
+        break;
+    default:
+        t.bloque = c;
+        t.color = ConsoleColor::Black;
+    }
     return t;
 }

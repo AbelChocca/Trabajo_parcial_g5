@@ -17,8 +17,7 @@ namespace config {
 class Game {
 private:
     bool running;
-
-    Menu* menu;
+    GameState* currentState;
 
 public:
     Game();
@@ -28,6 +27,10 @@ public:
     void render();
     void update();
     void salir();
+    
+    GameState* getState();
+
+    void setState(GameState* newState);
 };
 
 
