@@ -6,9 +6,9 @@ Tile InputSelectorCharToTile(char c);
 
 Selector::Selector() {
 	this->fondo = new EstructuraEstatica(0, 0);
-	this->fondo->loadMap("selector.txt", SelectorCharToTile);
+	this->fondo->loadMap("assets/selector.txt", SelectorCharToTile);
 	this->input = new EstructuraDinamica(4, 16, fondo);
-	this->input->loadMap("input_selector.txt", InputSelectorCharToTile);
+	this->input->loadMap("assets/input_selector.txt", InputSelectorCharToTile);
 	this->selectedOption = 0;
 };
 Selector::~Selector() {

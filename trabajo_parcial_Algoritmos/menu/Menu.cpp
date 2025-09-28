@@ -8,9 +8,9 @@ Tile InputCharToTile(char c);
 Menu::Menu() {
 
     layout = new EstructuraEstatica(0, 0);
-    layout->loadMap("../assets/menu.txt", MenuCharToTile);
+    layout->loadMap("assets/menu.txt", MenuCharToTile);
     input = new EstructuraDinamica(POSX_INPUT, POSY_INPUT, layout);
-    input->loadMap("../assets/input_handler.txt", InputCharToTile);
+    input->loadMap("assets/input_handler.txt", InputCharToTile);
     opcionSeleccionada = 0;
 }
 
