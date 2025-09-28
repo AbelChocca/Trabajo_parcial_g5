@@ -131,6 +131,11 @@
     <Text Include="assets\input_selector.txt" />
     <Text Include="assets\menu.txt" />
     <Text Include="assets\selector.txt" />
+    <Text Include="ia_sprite1.txt" />
+    <Text Include="ia_sprite2.txt" />
+    <Text Include="personaje_sprite1.txt" />
+    <Text Include="personaje_sprite2.txt" />
+    <Text Include="personaje_sprite3.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
