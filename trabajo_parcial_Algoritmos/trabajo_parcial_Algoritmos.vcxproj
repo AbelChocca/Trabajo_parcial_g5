@@ -115,6 +115,8 @@
     <ClCompile Include="core\Game.cpp" />
     <ClCompile Include="core\main.cpp" />
     <ClCompile Include="core\Map.cpp" />
+    <ClCompile Include="levels\level3\mundo3.cpp" />
+    <ClCompile Include="levels\level3\mundo3_e1.cpp" />
     <ClCompile Include="menu\Menu.cpp" />
     <ClCompile Include="selector\selector.cpp" />
   </ItemGroup>
@@ -123,6 +125,8 @@
     <ClInclude Include="core\Game.h" />
     <ClInclude Include="core\GameState.h" />
     <ClInclude Include="core\Map.h" />
+    <ClInclude Include="levels\level3\mundo3.h" />
+    <ClInclude Include="levels\level3\mundo3_e1.h" />
     <ClInclude Include="menu\Menu.h" />
     <ClInclude Include="selector\Selector.h" />
   </ItemGroup>
@@ -130,6 +134,9 @@
     <Text Include="assets\input_handler.txt" />
     <Text Include="assets\input_selector.txt" />
     <Text Include="assets\menu.txt" />
+    <Text Include="assets\mundo3_dialogo1.txt" />
+    <Text Include="assets\mundo3_e1.txt" />
+    <Text Include="assets\mundo3_e2.txt" />
     <Text Include="assets\selector.txt" />
     <Text Include="assets\ia_sprite1.txt" />
     <Text Include="assets\ia_sprite2.txt" />

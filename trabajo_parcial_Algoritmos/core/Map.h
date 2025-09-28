@@ -8,7 +8,7 @@ class Estructura {
 private:
     short posX;
     short posY;
-    size_t ancho;
+    short ancho;
     short alto;
     Tile** grafico;
 

@@ -36,17 +36,25 @@ bool Estructura::loadMap(const std::string& filename, CharToTileFunc charToTile)
 }
 
 void Estructura::render() {
-    for (int row = 0; row < this->alto && row < MAX_HEIGHT; row++) {
-        for (int col = 0; col < this->ancho && col < MAX_WIDTH; col++) {
-            Tile& t = this->grafico[row][col];
+    if (!grafico) return;
 
+    for (int row = 0; row < this->alto && row < MAX_HEIGHT; row++) {
+        if (!grafico[row]) continue;
+        for (int col = 0; col < this->ancho && col < MAX_WIDTH; col++) {
+            int x = this->posX + col;
+            int y = this->posY + row;
+
+            if (x < 0 || x >= MAX_WIDTH || y < 0 || y >= MAX_HEIGHT)
+                continue;
+
+            Tile& t = grafico[row][col];
             if (t.bloque != L' ') {
-                Console::SetCursorPosition(this->posX + col, this->posY + row);
+                Console::SetCursorPosition(x, y);
                 Console::ForegroundColor = t.color;
-                
                 Console::Write(t.bloque);
             }
         }
     }
+
     Console::ForegroundColor = ConsoleColor::White;
 }
