@@ -1,0 +1,10 @@
+***********************************************************
+*                                                         *
+*  En este mundo, te enfrentaras a diversos retos acompa- *
+*  niado de una Inteligencia Artificial simulada, la cual *
+*  podra analizar y ayudarlo a resolver los puzzles pres- *
+*  entados. Espero que lo disfrute!                       *
+*                                                         *
+*                                              ENTER ->   *
+*                                                         *
+***********************************************************

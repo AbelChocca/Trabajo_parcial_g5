@@ -7,25 +7,38 @@ Tile CharacterCharToTile(char c);
 
 Mundo3::Mundo3()
 {
+    this->mostrar_dialogo = true;
 	this->frame_actual = 0;
-	this->escenarioActual = new Mundo3Escenario1();
-    this->inicializarJugador();
+	this->escenarioActual = new Mundo3Escenario1(&this->mostrar_dialogo);
 
     this->cargarFrame("assets/personaje_sprite1.txt");
     this->cargarFrame("assets/personaje_sprite2.txt");
     this->cargarFrame("assets/personaje_sprite3.txt");
+
+    this->inicializarPersonajes();
+
+    if (auto escenario1 = dynamic_cast<Mundo3Escenario1*>(this->escenarioActual)) {
+        escenario1->setJugador(this->jugador);
+    }
+
 }
-void Mundo3::inicializarJugador() {
+void Mundo3::inicializarPersonajes() {
     Mundo3Escenario1* escenario1 = dynamic_cast<Mundo3Escenario1*>(this->escenarioActual);
 
     this->jugador = new EstructuraDinamica(10, 40, escenario1->getFondo());
     this->jugador->loadMap("assets/personaje_sprite1.txt", CharacterCharToTile);
+
+    this->IA = new EstructuraDinamica(30, 30, escenario1->getFondo());
+    this->IA->loadMap("assets/ia_sprite1.txt", nullptr);
 }
 
 Mundo3::~Mundo3()
 {
     delete jugador;
     delete escenarioActual;
+}
+bool Mundo3::esValido(int x, int y) {
+    return (x >= 0 && x < this->escenarioActual->getAncho() && y >= 0 && y < this->escenarioActual->getAlto());
 }
 
 void Mundo3::mostrar() {
@@ -39,8 +52,55 @@ void Mundo3::mostrar() {
         this->jugador->render();
     }
 }
+void Mundo3::mover(char c) {
+    this->jugador->borrar();
+
+    short posX = this->jugador->getPosX();
+    short posY = this->jugador->getPosY();
+
+    switch (c)
+    {
+    case 'd':
+        if (posX < MAX_WIDTH - this->jugador->getAncho()) {
+            this->jugador->setPosX(posX + 1);
+        }
+        if (sprites_jugador.size() > 1) {
+            this->jugador->setSprite(this->sprites_jugador[1]);
+        }
+        break;
+    case 'a':
+        if (posX >= 1) {
+            this->jugador->setPosX(posX - 1);
+        }
+        if (sprites_jugador.size() > 2) {
+            this->jugador->setSprite(this->sprites_jugador[2]);
+        }
+        break;
+    case 'w':
+        if (posY > 37)
+            this->jugador->setPosY(posY - 1);
+        break;
+    case 's':
+        if (posY < MAX_HEIGHT - this->jugador->getAlto())
+            this->jugador->setPosY(posY + 1);
+        break;
+    default:
+        if (!sprites_jugador.empty()) {
+            this->jugador->setSprite(this->sprites_jugador[0]);
+        }
+        break;
+    }
+
+    this->jugador->render();
+}
+
 void Mundo3::handleInput(Game* game, char c) {
-    this->escenarioActual->handleInput(game, c);
+    if (this->mostrar_dialogo) {
+        this->escenarioActual->handleDialog(c);
+    }
+    else {
+        this->mover(c);
+    }
 }
 void Mundo3::update() {
     if (this->escenarioActual) {
@@ -69,7 +129,7 @@ void Mundo3::cargarFrame(const std::string& archivo) {
         nuevoFrame.push_back(fila);
     }
 
-    sprites_jugador.push_back(nuevoFrame);
+    this->sprites_jugador.push_back(nuevoFrame);
 }
 
 Tile CharacterCharToTile(char c) {

@@ -48,6 +48,7 @@ void Selector::handleInput(Game* game, char tecla) {
 		case 0:
 			break;
 		case 1:
+
 			break;
 		case 2:
 			game->setState(new Mundo3());

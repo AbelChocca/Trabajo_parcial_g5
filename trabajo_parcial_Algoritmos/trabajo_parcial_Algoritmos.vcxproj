@@ -135,6 +135,10 @@
     <Text Include="assets\input_selector.txt" />
     <Text Include="assets\menu.txt" />
     <Text Include="assets\mundo3_dialogo1.txt" />
+    <Text Include="assets\mundo3_dialogo2.txt" />
+    <Text Include="assets\mundo3_dialogo3.txt" />
+    <Text Include="assets\mundo3_dialogo4.txt" />
+    <Text Include="assets\mundo3_dialogo5.txt" />
     <Text Include="assets\mundo3_e1.txt" />
     <Text Include="assets\mundo3_e2.txt" />
     <Text Include="assets\selector.txt" />
