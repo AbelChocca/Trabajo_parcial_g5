@@ -1,0 +1,10 @@
+***********************************************************
+*                                                         *
+*  Con cada respuesta que se genera de la herramienta     *
+*  generativa, estamos asociando mas responsabilidad      *
+*  a un modelo de lenguaje que se podria equivocar en     *
+*  momentos claves. Que pasaria si en algun momento nos   *
+*  tocara enfrentar un problema sin el uso de esta?       *
+*                                              ENTER ->   *
+*                                                         *
+***********************************************************

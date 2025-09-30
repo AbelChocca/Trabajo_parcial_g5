@@ -19,7 +19,7 @@ bool Estructura::loadMap(const std::string& filename, CharToTileFunc charToTile)
     if (!file.is_open()) {
         return false;
     }
-
+   
     std::string line;
     int row = 0;
 

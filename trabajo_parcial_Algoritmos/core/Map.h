@@ -1,11 +1,12 @@
 #pragma once
 #include "Config.h"
 #include <string>
+#include <vector>
 
 typedef Tile(*CharToTileFunc)(char);
 
 class Estructura {
-private:
+protected:
     short posX;
     short posY;
     short ancho;
@@ -66,12 +67,32 @@ public:
                     Tile& t = fondo->getGrafico()[y][x];
                     Console::SetCursorPosition(x, y);
                     Console::ForegroundColor = t.color;
-                    Console::Write(t.bloque);
+                    Console::Write(t.bloque); // ' '
                 }
             }
         }
         Console::ForegroundColor = ConsoleColor::White;
     }
+
+    void setSprite(const std::vector<std::vector<Tile>>& frame) {
+
+        if (this->grafico) {
+            for (int i = 0; i < this->alto; i++) {
+                delete[] this->grafico[i];
+            }
+            delete[] this->grafico;
+        }
+
+
+        this->grafico = new Tile * [alto];
+        for (int i = 0; i < alto; i++) {
+            this->grafico[i] = new Tile[ancho];
+            for (int j = 0; j < ancho; j++) {
+                this->grafico[i][j] = frame[i][j];
+            }
+        }
+    }
+
 
 };
 

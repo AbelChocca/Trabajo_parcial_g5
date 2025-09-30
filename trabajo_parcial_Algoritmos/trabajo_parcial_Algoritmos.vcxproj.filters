@@ -89,6 +89,18 @@
     <Text Include="assets\mundo3_dialogo1.txt">
       <Filter>assets</Filter>
     </Text>
+    <Text Include="assets\mundo3_dialogo2.txt">
+      <Filter>assets</Filter>
+    </Text>
+    <Text Include="assets\mundo3_dialogo3.txt">
+      <Filter>assets</Filter>
+    </Text>
+    <Text Include="assets\mundo3_dialogo4.txt">
+      <Filter>assets</Filter>
+    </Text>
+    <Text Include="assets\mundo3_dialogo5.txt">
+      <Filter>assets</Filter>
+    </Text>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="core">
