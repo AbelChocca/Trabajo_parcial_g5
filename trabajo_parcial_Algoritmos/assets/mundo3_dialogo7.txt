@@ -1,0 +1,10 @@
+***********************************************************
+*                                                         *
+* (Xaro): Dado a que el mapa esta generado por mi, puede  *
+* haber ciertas fallas que irian en tu contra y te        *
+* podrian obligar a repetir el mapa. Estare a tu lado en  *
+* todo momento. A tu derecha hay un panel que te puede    *
+* servir de ayuda. Comenzemos!                            *
+*                                              ENTER ->   *
+*                                                         *
+***********************************************************

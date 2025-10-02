@@ -6,7 +6,7 @@ namespace config {
 		HANDLE hOut = GetStdHandle(STD_OUTPUT_HANDLE);
 
 		COORD bufferSize;
-		bufferSize.X = 150;
+		bufferSize.X = 180;
 		bufferSize.Y = 80;
 		SetConsoleScreenBufferSize(hOut, bufferSize);
 

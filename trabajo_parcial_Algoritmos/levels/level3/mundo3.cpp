@@ -1,44 +1,54 @@
 ﻿#include "mundo3.h"
-#include "../../core/Map.h"
+#include "../../Entidad/Jugador.h"
+#include "../../Entidad/IA.h"
+#include "mundo3_tile_control.h"
 #include "mundo3_e1.h"
-#include <vector>
-
-Tile CharacterCharToTile(char c);
+#include <queue>
 
 Mundo3::Mundo3()
 {
+    this->escenarioActual = new Mundo3Escenario1(&this->mostrar_dialogo, &this->guardarIA);
+
+    this->jugadorEntity = new Jugador(10, 40, this->escenarioActual->getFondo());
+    this->IAEntity = new IA(100, 35, this->escenarioActual->getFondo());
+
     this->mostrar_dialogo = true;
-	this->frame_actual = 0;
-	this->escenarioActual = new Mundo3Escenario1(&this->mostrar_dialogo);
+    this->guardarIA = false;
 
-    this->cargarFrame("assets/personaje_sprite1.txt");
-    this->cargarFrame("assets/personaje_sprite2.txt");
-    this->cargarFrame("assets/personaje_sprite3.txt");
+    this->panel_control = new EstructuraEstatica(151, 0);
+    this->panel_control->loadMap("assets/panel_control.txt", tile_control::PanelCharToTile);
+    
+    this->cargarFrame(this->jugadorEntity->getSpritesJugador(), "assets/personaje_sprite1.txt", tile_control::CharacterCharToTile);
+    this->cargarFrame(this->jugadorEntity->getSpritesJugador(), "assets/personaje_sprite2.txt", tile_control::CharacterCharToTile);
+    this->cargarFrame(this->jugadorEntity->getSpritesJugador(), "assets/personaje_sprite3.txt", tile_control::CharacterCharToTile);
 
-    this->inicializarPersonajes();
+    this->cargarFrame(this->IAEntity->getSpritesIA(), "assets/ia_sprite1.txt", tile_control::IACharToTile);
+    this->cargarFrame(this->IAEntity->getSpritesIA(), "assets/ia_sprite2.txt", tile_control::IACharToTile);
+
 
     if (auto escenario1 = dynamic_cast<Mundo3Escenario1*>(this->escenarioActual)) {
-        escenario1->setJugador(this->jugador);
+        escenario1->setJugador(this->jugadorEntity);
+        escenario1->setIA(this->IAEntity);
     }
 
-}
-void Mundo3::inicializarPersonajes() {
-    Mundo3Escenario1* escenario1 = dynamic_cast<Mundo3Escenario1*>(this->escenarioActual);
-
-    this->jugador = new EstructuraDinamica(10, 40, escenario1->getFondo());
-    this->jugador->loadMap("assets/personaje_sprite1.txt", CharacterCharToTile);
-
-    this->IA = new EstructuraDinamica(30, 30, escenario1->getFondo());
-    this->IA->loadMap("assets/ia_sprite1.txt", nullptr);
+    this->IAEntity->getCuerpo()->setSprite(this->IAEntity->getSpritesIA()[1]);
 }
 
 Mundo3::~Mundo3()
 {
-    delete jugador;
+    delete jugadorEntity;
     delete escenarioActual;
 }
-bool Mundo3::esValido(int x, int y) {
-    return (x >= 0 && x < this->escenarioActual->getAncho() && y >= 0 && y < this->escenarioActual->getAlto());
+bool Mundo3::esValidoTile(int tx, int ty) {
+    int anchoMapa = this->escenarioActual->getAncho();
+    int altoMapa = this->escenarioActual->getAlto();
+
+    if (tx < 0 || ty < 0 || tx >= anchoMapa || ty >= altoMapa) {
+        return false;
+    }
+
+    Tile t = this->escenarioActual->getFondo()->getGrafico()[ty][tx];
+    return !t.isSolid;
 }
 
 void Mundo3::mostrar() {
@@ -48,50 +58,108 @@ void Mundo3::mostrar() {
         this->escenarioActual->mostrar();
     }
 
-    if (this->jugador) {
-        this->jugador->render();
+    if (this->jugadorEntity) {
+        this->jugadorEntity->render();
+    }
+
+    if (this->panel_control) {
+        this->panel_control->render();
     }
 }
+void Mundo3::renderAnimation() {
+    this->escenarioActual->renderAnimation();
+}
 void Mundo3::mover(char c) {
-    this->jugador->borrar();
+    EstructuraDinamica* jugadorCuerpo = this->jugadorEntity->getCuerpo();
+    EstructuraDinamica* iaCuerpo = this->IAEntity->getCuerpo();
 
-    short posX = this->jugador->getPosX();
-    short posY = this->jugador->getPosY();
+    jugadorCuerpo->borrar();
+    iaCuerpo->borrar();
+
+    short posX = jugadorCuerpo->getPosX();
+    short posY = jugadorCuerpo->getPosY();
+
+    short posIX = iaCuerpo->getPosX();
+    short posIY = iaCuerpo->getPosY();
+
+    short destinoX = posX + (jugadorCuerpo->getAncho() * 2);
+    short destinoY = posY + (jugadorCuerpo->getAlto() / 2);
+   
+
+    // Distancia entre IA y Jugador
+    int dist = abs(posIX - destinoX) + abs(posIY - destinoY);
+
+    if (dist > 50) {
+        jugadorCuerpo->render();
+        this->IAEntity->moverIAhaciaDestino(destinoX, destinoY);
+        return;
+    }
 
     switch (c)
     {
     case 'd':
-        if (posX < MAX_WIDTH - this->jugador->getAncho()) {
-            this->jugador->setPosX(posX + 1);
+        // jugador
+        if (this->escenarioActual->setColisionCondition(c, jugadorCuerpo)) {
+            jugadorCuerpo->setPosX(posX + 1);
         }
-        if (sprites_jugador.size() > 1) {
-            this->jugador->setSprite(this->sprites_jugador[1]);
+        jugadorCuerpo->setSprite(this->jugadorEntity->getSpritesJugador()[1]);
+
+        // IA
+        if (this->escenarioActual->setColisionCondition(c, iaCuerpo)) {
+            iaCuerpo->setPosX(posIX + 1);
         }
+        iaCuerpo->setSprite(this->IAEntity->getSpritesIA()[0]);
+
         break;
     case 'a':
-        if (posX >= 1) {
-            this->jugador->setPosX(posX - 1);
+        //jugador
+        if (this->escenarioActual->setColisionCondition(c, jugadorCuerpo)) {
+            jugadorCuerpo->setPosX(posX - 1);
         }
-        if (sprites_jugador.size() > 2) {
-            this->jugador->setSprite(this->sprites_jugador[2]);
+        jugadorCuerpo->setSprite(this->jugadorEntity->getSpritesJugador()[2]);
+
+        // IA
+        if (this->escenarioActual->setColisionCondition(c, iaCuerpo)) {
+            iaCuerpo->setPosX(posIX - 1);
         }
+        iaCuerpo->setSprite(this->IAEntity->getSpritesIA()[1]);
         break;
     case 'w':
-        if (posY > 37)
-            this->jugador->setPosY(posY - 1);
+        if (this->escenarioActual->setColisionCondition(c, jugadorCuerpo))
+            jugadorCuerpo->setPosY(posY - 1);
+        if (this->escenarioActual->setColisionCondition(c, iaCuerpo))
+            iaCuerpo->setPosY(posIY - 1);
         break;
     case 's':
-        if (posY < MAX_HEIGHT - this->jugador->getAlto())
-            this->jugador->setPosY(posY + 1);
+        if (this->escenarioActual->setColisionCondition(c, jugadorCuerpo))
+            jugadorCuerpo->setPosY(posY + 1);
+
+        if (this->escenarioActual->setColisionCondition(c, iaCuerpo))
+            iaCuerpo->setPosY(posIY + 1);
+        break;
+    case 'g':
+        jugadorCuerpo->render();
+        this->IAEntity->moverIAhaciaDestino(destinoX, destinoY);
         break;
     default:
-        if (!sprites_jugador.empty()) {
-            this->jugador->setSprite(this->sprites_jugador[0]);
+        if (!this->jugadorEntity->getSpritesJugador().empty()) {
+            jugadorCuerpo->setSprite(this->jugadorEntity->getSpritesJugador()[0]);
         }
         break;
     }
+    if (this->escenarioActual->estaCompletado()) {
+        GameState* siguiente = this->escenarioActual->cambiarEstado();
+        delete this->escenarioActual;
+        this->escenarioActual = siguiente;
+        jugadorCuerpo->setSprite(this->jugadorEntity->getSpritesJugador()[0]);
+        
+        Console::Clear();
+        this->mostrar();
+        return;
+    }
 
-    this->jugador->render();
+    jugadorCuerpo->render();
+    iaCuerpo->render();
 }
 
 void Mundo3::handleInput(Game* game, char c) {
@@ -107,12 +175,15 @@ void Mundo3::update() {
         this->escenarioActual->mostrar();
     }
 
-    if (this->jugador) {
-        this->jugador->render();
+    if (this->jugadorEntity) {
+        this->jugadorEntity->render();
     }
 }
 
-void Mundo3::cargarFrame(const std::string& archivo) {
+void Mundo3::cargarFrame(
+    vector<vector<vector<Tile>>>& sprites, 
+    const std::string& archivo,
+    CharToTileFunc charToTile) {
     std::ifstream file(archivo);
     if (!file.is_open()) {
         throw std::runtime_error("No se pudo abrir el archivo: " + archivo);
@@ -124,55 +195,10 @@ void Mundo3::cargarFrame(const std::string& archivo) {
     while (std::getline(file, linea)) {
         std::vector<Tile> fila;
         for (char c : linea) {
-            fila.push_back(CharacterCharToTile(c));
+            fila.push_back(charToTile(c));
         }
         nuevoFrame.push_back(fila);
     }
 
-    this->sprites_jugador.push_back(nuevoFrame);
-}
-
-Tile CharacterCharToTile(char c) {
-    Tile t;
-
-    switch (c)
-    {
-    case '*':
-        t.bloque = L'▒';
-        t.color = ConsoleColor::DarkYellow;
-        break;
-    case '#':
-        t.bloque = L'▓';
-        t.color = ConsoleColor::Yellow;
-        break;
-    case '0':
-        t.bloque = L'█';
-        t.color = ConsoleColor::White;
-        break;
-    case '1':
-        t.bloque = L'░';
-        t.color = ConsoleColor::Black;
-        break;
-    case '2':
-        t.bloque = L'░';
-        t.color = ConsoleColor::DarkGray;
-        break;
-    case '3':
-        t.bloque = L'▒';
-        t.color = ConsoleColor::Gray;
-        break;
-    case '4':
-        t.bloque = L'░';
-        t.color = ConsoleColor::DarkBlue;
-        break;
-    case '5':
-        t.bloque = L'░';
-        t.color = ConsoleColor::Black;
-        break;
-    default:
-        t.bloque = c;
-        t.color = ConsoleColor::Black;
-        break;
-    }
-    return t;
+    sprites.push_back(nuevoFrame);
 }

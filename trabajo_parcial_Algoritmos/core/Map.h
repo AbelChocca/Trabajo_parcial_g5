@@ -58,6 +58,13 @@ private:
     EstructuraEstatica* fondo;
 public:
     EstructuraDinamica(short x, short y, EstructuraEstatica* f) : Estructura(x, y), fondo(f) {};
+
+    EstructuraEstatica* getFondo() {
+        return this->fondo;
+    }
+    void setFondo(EstructuraEstatica* fondo) {
+        this->fondo = fondo;
+    }
     void borrar() override {
         for (int row = 0; row < this->getAlto(); row++) {
             for (int col = 0; col < this->getAncho(); col++) {
