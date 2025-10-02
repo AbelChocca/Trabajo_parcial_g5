@@ -1,0 +1,10 @@
+***********************************************************
+*                                                         *
+* (Xaro): Hola! Me llamo Xaro y te acompañare en esta     *
+* aventura. Este mapa esta generado 100% por mi, asi que  *
+* debes tener precauciones antes de dar un paso adelante. *
+*                                                         *
+*                                                         *
+*                                              ENTER ->   *
+*                                                         *
+***********************************************************

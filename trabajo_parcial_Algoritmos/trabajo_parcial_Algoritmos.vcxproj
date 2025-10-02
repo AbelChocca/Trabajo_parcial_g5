@@ -115,22 +115,47 @@
     <ClCompile Include="core\Game.cpp" />
     <ClCompile Include="core\main.cpp" />
     <ClCompile Include="core\Map.cpp" />
+    <ClCompile Include="enemigo\enemigo.cpp" />
+    <ClCompile Include="Entidad\IA.cpp" />
+    <ClCompile Include="Entidad\Jefe.cpp" />
+    <ClCompile Include="Entidad\Jugador.cpp" />
     <ClCompile Include="levels\level3\mundo3.cpp" />
     <ClCompile Include="levels\level3\mundo3_e1.cpp" />
+    <ClCompile Include="levels\level3\mundo3_e2.cpp" />
+    <ClCompile Include="levels\level3\mundo_3_tile_control.cpp" />
     <ClCompile Include="menu\Menu.cpp" />
     <ClCompile Include="selector\selector.cpp" />
+    <ClCompile Include="utils\Arma.cpp" />
+    <ClCompile Include="utils\Ataque.cpp" />
+    <ClCompile Include="utils\BarraVida.cpp" />
+    <ClCompile Include="utils\Inventario.cpp" />
+    <ClCompile Include="utils\Pocion.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="core\Config.h" />
     <ClInclude Include="core\Game.h" />
     <ClInclude Include="core\GameState.h" />
     <ClInclude Include="core\Map.h" />
+    <ClInclude Include="enemigo\enemigo.h" />
+    <ClInclude Include="Entidad\Entidad.h" />
+    <ClInclude Include="Entidad\IA.h" />
+    <ClInclude Include="Entidad\Jefe.h" />
+    <ClInclude Include="Entidad\Jugador.h" />
     <ClInclude Include="levels\level3\mundo3.h" />
     <ClInclude Include="levels\level3\mundo3_e1.h" />
+    <ClInclude Include="levels\level3\mundo3_e2.h" />
+    <ClInclude Include="levels\level3\mundo3_tile_control.h" />
     <ClInclude Include="menu\Menu.h" />
     <ClInclude Include="selector\Selector.h" />
+    <ClInclude Include="utils\Arma.h" />
+    <ClInclude Include="utils\Ataque.h" />
+    <ClInclude Include="utils\BarraVida.h" />
+    <ClInclude Include="utils\Inventario.h" />
+    <ClInclude Include="utils\Item.h" />
+    <ClInclude Include="utils\Pocion.h" />
   </ItemGroup>
   <ItemGroup>
+    <Text Include="assets\enemigo.txt" />
     <Text Include="assets\input_handler.txt" />
     <Text Include="assets\input_selector.txt" />
     <Text Include="assets\menu.txt" />
@@ -139,8 +164,13 @@
     <Text Include="assets\mundo3_dialogo3.txt" />
     <Text Include="assets\mundo3_dialogo4.txt" />
     <Text Include="assets\mundo3_dialogo5.txt" />
+    <Text Include="assets\mundo3_dialogo6.txt" />
+    <Text Include="assets\mundo3_dialogo7.txt" />
     <Text Include="assets\mundo3_e1.txt" />
     <Text Include="assets\mundo3_e2.txt" />
+    <Text Include="assets\mundo3_e2_dialogo1.txt" />
+    <Text Include="assets\mundo3_e2_dialogo2.txt" />
+    <Text Include="assets\panel_control.txt" />
     <Text Include="assets\selector.txt" />
     <Text Include="assets\ia_sprite1.txt" />
     <Text Include="assets\ia_sprite2.txt" />

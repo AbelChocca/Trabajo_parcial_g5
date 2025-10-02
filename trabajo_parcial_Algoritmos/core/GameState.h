@@ -2,6 +2,12 @@
 
 class Game;
 class EstructuraEstatica;
+class EstructuraDinamica;
+
+struct Rect {
+    int x, y;
+    short ancho, alto;
+};
 
 class GameState
 {
@@ -13,14 +19,29 @@ public:
     };
     virtual void update() = 0;
     virtual void mostrar() = 0;
+    virtual void renderAnimation() {
+        return;
+    };
+    virtual bool estaCompletado() {
+        return false;
+    };
+    virtual GameState* cambiarEstado() {
+        return nullptr;
+    }
+    virtual bool setColisionCondition(char c, EstructuraDinamica*& entity) {
+        return false;
+    }
 
+    virtual EstructuraEstatica* getFondo() {
+        return nullptr;
+    }
     virtual void handleDialog(char tecla) {
         return;
     }
     virtual short getAncho() {
-        return;
+        return 0;
     }
     virtual short getAlto() {
-        return;
+        return 0;
     }
 };

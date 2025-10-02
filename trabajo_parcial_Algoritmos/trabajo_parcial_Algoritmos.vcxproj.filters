@@ -25,6 +25,39 @@
     <ClCompile Include="levels\level3\mundo3_e1.cpp">
       <Filter>levels\level3</Filter>
     </ClCompile>
+    <ClCompile Include="levels\level3\mundo3_e2.cpp">
+      <Filter>levels\level3</Filter>
+    </ClCompile>
+    <ClCompile Include="enemigo\enemigo.cpp">
+      <Filter>enemigo</Filter>
+    </ClCompile>
+    <ClCompile Include="levels\level3\mundo_3_tile_control.cpp">
+      <Filter>levels\level3</Filter>
+    </ClCompile>
+    <ClCompile Include="Entidad\IA.cpp">
+      <Filter>Entidad</Filter>
+    </ClCompile>
+    <ClCompile Include="Entidad\Jefe.cpp">
+      <Filter>Entidad</Filter>
+    </ClCompile>
+    <ClCompile Include="Entidad\Jugador.cpp">
+      <Filter>Entidad</Filter>
+    </ClCompile>
+    <ClCompile Include="utils\Ataque.cpp">
+      <Filter>utils</Filter>
+    </ClCompile>
+    <ClCompile Include="utils\BarraVida.cpp">
+      <Filter>utils</Filter>
+    </ClCompile>
+    <ClCompile Include="utils\Inventario.cpp">
+      <Filter>utils</Filter>
+    </ClCompile>
+    <ClCompile Include="utils\Pocion.cpp">
+      <Filter>utils</Filter>
+    </ClCompile>
+    <ClCompile Include="utils\Arma.cpp">
+      <Filter>utils</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="core\GameState.h">
@@ -50,6 +83,45 @@
     </ClInclude>
     <ClInclude Include="levels\level3\mundo3_e1.h">
       <Filter>levels\level3</Filter>
+    </ClInclude>
+    <ClInclude Include="levels\level3\mundo3_e2.h">
+      <Filter>levels\level3</Filter>
+    </ClInclude>
+    <ClInclude Include="enemigo\enemigo.h">
+      <Filter>enemigo</Filter>
+    </ClInclude>
+    <ClInclude Include="levels\level3\mundo3_tile_control.h">
+      <Filter>levels\level3</Filter>
+    </ClInclude>
+    <ClInclude Include="Entidad\Entidad.h">
+      <Filter>Entidad</Filter>
+    </ClInclude>
+    <ClInclude Include="Entidad\IA.h">
+      <Filter>Entidad</Filter>
+    </ClInclude>
+    <ClInclude Include="Entidad\Jefe.h">
+      <Filter>Entidad</Filter>
+    </ClInclude>
+    <ClInclude Include="Entidad\Jugador.h">
+      <Filter>Entidad</Filter>
+    </ClInclude>
+    <ClInclude Include="utils\Ataque.h">
+      <Filter>utils</Filter>
+    </ClInclude>
+    <ClInclude Include="utils\BarraVida.h">
+      <Filter>utils</Filter>
+    </ClInclude>
+    <ClInclude Include="utils\Inventario.h">
+      <Filter>utils</Filter>
+    </ClInclude>
+    <ClInclude Include="utils\Pocion.h">
+      <Filter>utils</Filter>
+    </ClInclude>
+    <ClInclude Include="utils\Arma.h">
+      <Filter>utils</Filter>
+    </ClInclude>
+    <ClInclude Include="utils\Item.h">
+      <Filter>utils</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -101,6 +173,24 @@
     <Text Include="assets\mundo3_dialogo5.txt">
       <Filter>assets</Filter>
     </Text>
+    <Text Include="assets\mundo3_dialogo6.txt">
+      <Filter>assets</Filter>
+    </Text>
+    <Text Include="assets\mundo3_dialogo7.txt">
+      <Filter>assets</Filter>
+    </Text>
+    <Text Include="assets\enemigo.txt">
+      <Filter>assets</Filter>
+    </Text>
+    <Text Include="assets\mundo3_e2_dialogo1.txt">
+      <Filter>assets</Filter>
+    </Text>
+    <Text Include="assets\mundo3_e2_dialogo2.txt">
+      <Filter>assets</Filter>
+    </Text>
+    <Text Include="assets\panel_control.txt">
+      <Filter>assets</Filter>
+    </Text>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="core">
@@ -120,6 +210,15 @@
     </Filter>
     <Filter Include="selector">
       <UniqueIdentifier>{4cac3c7f-649f-4650-8438-d865f2d2d128}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="enemigo">
+      <UniqueIdentifier>{37d2bea3-af1f-4969-a6bc-ef2a0332e8e2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Entidad">
+      <UniqueIdentifier>{8acd0557-3809-4615-88fe-66de32493078}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="utils">
+      <UniqueIdentifier>{e91f4409-8921-45a8-8088-4ab015213fc1}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

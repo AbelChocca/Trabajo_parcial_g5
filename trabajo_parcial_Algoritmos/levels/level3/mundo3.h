@@ -3,29 +3,34 @@
 #include <vector>
 #include <string>
 
+using namespace std;
+
 class EstructuraEstatica;
 class EstructuraDinamica;
+class Jugador;
+class IA;
 struct Tile;
 typedef Tile(*CharToTileFunc)(char);
 
 class Mundo3 : public GameState
 {
 private:
-	EstructuraDinamica* jugador;
-	EstructuraDinamica* IA;
+	Jugador* jugadorEntity;
+	IA* IAEntity;
+	EstructuraEstatica* panel_control;
 	GameState* escenarioActual;
-	std::vector<std::vector<std::vector<Tile>>> sprites_jugador;
 	short frame_actual;
 	bool mostrar_dialogo;
+	bool guardarIA; 
 public:
 	Mundo3();
 	~Mundo3();
 
-	void Mundo3::cargarFrame(const std::string& archivo);
-	void Mundo3::inicializarPersonajes();
-	void Mundo3::mover(char c);
-	bool Mundo3::esValido(int x, int y);
+	void cargarFrame(vector<vector<vector<Tile>>>& sprites, const string& archivo, CharToTileFunc charToTile);
+	void mover(char c);
+	bool esValidoTile(int tx, int ty);
 
+	void renderAnimation() override;
 	void handleInput(Game* game, char tecla) override;
 	void update() override;
 	void mostrar() override;

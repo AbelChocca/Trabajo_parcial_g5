@@ -8,7 +8,7 @@
 
 using namespace System;
 
-const int MAX_WIDTH = 150;
+const int MAX_WIDTH = 180;
 const int MAX_HEIGHT = 80;
 
 struct Tile

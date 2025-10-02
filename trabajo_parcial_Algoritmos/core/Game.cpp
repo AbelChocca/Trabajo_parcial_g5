@@ -24,8 +24,9 @@ void Game::iniciar() {
         if (_kbhit()) {
             char tecla = _getch();
             currentState->handleInput(this, tecla);
-            Sleep(100);
         }
+        currentState->renderAnimation();
+        Sleep(100);
     }
 }
 
