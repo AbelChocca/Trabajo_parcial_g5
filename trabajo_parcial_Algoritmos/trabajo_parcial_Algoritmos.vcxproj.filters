@@ -43,20 +43,62 @@
     <ClCompile Include="Entidad\Jugador.cpp">
       <Filter>Entidad</Filter>
     </ClCompile>
-    <ClCompile Include="utils\Ataque.cpp">
-      <Filter>utils</Filter>
-    </ClCompile>
     <ClCompile Include="utils\BarraVida.cpp">
       <Filter>utils</Filter>
     </ClCompile>
     <ClCompile Include="utils\Inventario.cpp">
       <Filter>utils</Filter>
     </ClCompile>
-    <ClCompile Include="utils\Pocion.cpp">
+    <ClCompile Include="armas\Arma.cpp">
+      <Filter>armas</Filter>
+    </ClCompile>
+    <ClCompile Include="armas\PistolaLaser.cpp">
+      <Filter>armas</Filter>
+    </ClCompile>
+    <ClCompile Include="pociones\Pocion.cpp">
+      <Filter>pociones</Filter>
+    </ClCompile>
+    <ClCompile Include="pociones\PocionCurativa.cpp">
+      <Filter>pociones</Filter>
+    </ClCompile>
+    <ClCompile Include="utils\Item.cpp">
       <Filter>utils</Filter>
     </ClCompile>
-    <ClCompile Include="utils\Arma.cpp">
-      <Filter>utils</Filter>
+    <ClCompile Include="core\UtilsFunc.cpp">
+      <Filter>core</Filter>
+    </ClCompile>
+    <ClCompile Include="ataque\Ataque.cpp">
+      <Filter>ataques</Filter>
+    </ClCompile>
+    <ClCompile Include="ataque\Projectil.cpp">
+      <Filter>ataques</Filter>
+    </ClCompile>
+    <ClCompile Include="ataque\RayoCentinela.cpp">
+      <Filter>ataques</Filter>
+    </ClCompile>
+    <ClCompile Include="ataque\Explosivo.cpp">
+      <Filter>ataques</Filter>
+    </ClCompile>
+    <ClCompile Include="ataque\Laser.cpp">
+      <Filter>ataques</Filter>
+    </ClCompile>
+    <ClCompile Include="levels\level3\mundo3_e3.cpp">
+      <Filter>levels\level3</Filter>
+    </ClCompile>
+    <ClCompile Include="levels\level2\mundo1.cpp">
+      <Filter>levels\level1</Filter>
+    </ClCompile>
+    <ClCompile Include="levels\level2\mundo1_tile_control.cpp">
+      <Filter>levels\level1</Filter>
+    </ClCompile>
+    <ClCompile Include="levels\level2\Mundo1Escenario1.cpp">
+      <Filter>levels\level1</Filter>
+    </ClCompile>
+    <ClCompile Include="levels\level2\Mundo1Escenario2.cpp">
+      <Filter>levels\level1</Filter>
+    </ClCompile>
+    <ClCompile Include="instrucciones\Instrucciones.cpp">
+      <Filter>instrucciones</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -105,23 +147,62 @@
     <ClInclude Include="Entidad\Jugador.h">
       <Filter>Entidad</Filter>
     </ClInclude>
-    <ClInclude Include="utils\Ataque.h">
-      <Filter>utils</Filter>
-    </ClInclude>
     <ClInclude Include="utils\BarraVida.h">
       <Filter>utils</Filter>
     </ClInclude>
     <ClInclude Include="utils\Inventario.h">
       <Filter>utils</Filter>
     </ClInclude>
-    <ClInclude Include="utils\Pocion.h">
-      <Filter>utils</Filter>
-    </ClInclude>
-    <ClInclude Include="utils\Arma.h">
-      <Filter>utils</Filter>
-    </ClInclude>
     <ClInclude Include="utils\Item.h">
       <Filter>utils</Filter>
+    </ClInclude>
+    <ClInclude Include="armas\Arma.h">
+      <Filter>armas</Filter>
+    </ClInclude>
+    <ClInclude Include="armas\PistolaLaser.h">
+      <Filter>armas</Filter>
+    </ClInclude>
+    <ClInclude Include="pociones\Pocion.h">
+      <Filter>pociones</Filter>
+    </ClInclude>
+    <ClInclude Include="pociones\PocionCurativa.h">
+      <Filter>pociones</Filter>
+    </ClInclude>
+    <ClInclude Include="core\UtilsFunc.h">
+      <Filter>core</Filter>
+    </ClInclude>
+    <ClInclude Include="ataque\Ataque.h">
+      <Filter>ataques</Filter>
+    </ClInclude>
+    <ClInclude Include="ataque\Projectil.h">
+      <Filter>ataques</Filter>
+    </ClInclude>
+    <ClInclude Include="ataque\RayoCentinela.h">
+      <Filter>ataques</Filter>
+    </ClInclude>
+    <ClInclude Include="ataque\Explosivo.h">
+      <Filter>ataques</Filter>
+    </ClInclude>
+    <ClInclude Include="ataque\Laser.h">
+      <Filter>ataques</Filter>
+    </ClInclude>
+    <ClInclude Include="levels\level3\mundo3_e3.h">
+      <Filter>levels\level3</Filter>
+    </ClInclude>
+    <ClInclude Include="levels\level2\Mundo1.h">
+      <Filter>levels\level1</Filter>
+    </ClInclude>
+    <ClInclude Include="levels\level2\mundo1_tile_control.h">
+      <Filter>levels\level1</Filter>
+    </ClInclude>
+    <ClInclude Include="levels\level2\Mundo1Escenario1.h">
+      <Filter>levels\level1</Filter>
+    </ClInclude>
+    <ClInclude Include="levels\level2\Mundo1Escenario2.h">
+      <Filter>levels\level1</Filter>
+    </ClInclude>
+    <ClInclude Include="instrucciones\Instrucciones.h">
+      <Filter>instrucciones</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -191,6 +272,72 @@
     <Text Include="assets\panel_control.txt">
       <Filter>assets</Filter>
     </Text>
+    <Text Include="assets\pistola_laser.txt">
+      <Filter>assets</Filter>
+    </Text>
+    <Text Include="assets\pocion_curativa.txt">
+      <Filter>assets</Filter>
+    </Text>
+    <Text Include="assets\pocionCurativa_frame.txt">
+      <Filter>assets</Filter>
+    </Text>
+    <Text Include="assets\pistolaLaser_frame.txt">
+      <Filter>assets</Filter>
+    </Text>
+    <Text Include="assets\pocion_dialogo.txt">
+      <Filter>assets</Filter>
+    </Text>
+    <Text Include="assets\arma_dialogo.txt">
+      <Filter>assets</Filter>
+    </Text>
+    <Text Include="assets\jugador_pistolarLaser.txt">
+      <Filter>assets</Filter>
+    </Text>
+    <Text Include="assets\jugador_pistolarLaser2.txt">
+      <Filter>assets</Filter>
+    </Text>
+    <Text Include="assets\jugador_pistolarLaser3.txt">
+      <Filter>assets</Filter>
+    </Text>
+    <Text Include="assets\mundo3_jefe_sprite1.txt">
+      <Filter>assets</Filter>
+    </Text>
+    <Text Include="assets\mundo3_jefe_sprite2.txt">
+      <Filter>assets</Filter>
+    </Text>
+    <Text Include="assets\mundo3_jefe_sprite3.txt">
+      <Filter>assets</Filter>
+    </Text>
+    <Text Include="assets\mundo3_e3.txt">
+      <Filter>assets</Filter>
+    </Text>
+    <Text Include="assets\mundo1_1.txt">
+      <Filter>assets</Filter>
+    </Text>
+    <Text Include="assets\mundo1_dialogo1.txt">
+      <Filter>assets</Filter>
+    </Text>
+    <Text Include="assets\mundo1_dialogo2.txt">
+      <Filter>assets</Filter>
+    </Text>
+    <Text Include="assets\mundo1_dialogo3.txt">
+      <Filter>assets</Filter>
+    </Text>
+    <Text Include="assets\mundo1_dialogo4.txt">
+      <Filter>assets</Filter>
+    </Text>
+    <Text Include="assets\mundo1_dialogo5.txt">
+      <Filter>assets</Filter>
+    </Text>
+    <Text Include="assets\mundo1_dialogo6.txt">
+      <Filter>assets</Filter>
+    </Text>
+    <Text Include="assets\mundo1_dialogo7.txt">
+      <Filter>assets</Filter>
+    </Text>
+    <Text Include="assets\mundo1_e2.txt">
+      <Filter>assets</Filter>
+    </Text>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="core">
@@ -219,6 +366,21 @@
     </Filter>
     <Filter Include="utils">
       <UniqueIdentifier>{e91f4409-8921-45a8-8088-4ab015213fc1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="armas">
+      <UniqueIdentifier>{f5a4c335-60ae-4df4-9e0e-3e29a2cbf15f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="pociones">
+      <UniqueIdentifier>{678b208c-d8d2-4cfb-8c2a-0c29ee5b0d9a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ataques">
+      <UniqueIdentifier>{3cd1cb79-4bb0-4ff5-8450-55f7abb6a1c2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="levels\level1">
+      <UniqueIdentifier>{a7ecb19f-f628-440e-b56b-d11fcb5a5004}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="instrucciones">
+      <UniqueIdentifier>{1e235ecf-24e7-424b-9cdb-9ea81beed23c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

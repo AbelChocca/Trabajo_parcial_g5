@@ -9,6 +9,7 @@ using namespace std;
 
 class EstructuraEstatica;
 class EstructuraDinamica;
+class Item;
 
 class Mundo3Escenario2 : public GameState
 {
@@ -18,6 +19,8 @@ private:
 	vector<Enemigo*> enemigos;
 	Jugador* jugadorEntity;
 	IA* IAEntity;
+	Item* pistola;
+	Item* itemCercano = nullptr;
 	short indice_mensaje;
 	bool* mostrar_dialogo;
 	bool* guardarIA;
@@ -39,12 +42,17 @@ public:
 	bool colisionPrimerPunto();
 	void mandarAlInicio();
 
+	Item* getItemCercano() override;
+	void setItemCercano(Item* item) override;
+	void intentaRecojer(Jugador*& jugador) override;
 	void renderAnimation() override;
 	bool setColisionCondition(char c, EstructuraDinamica*& entity) override;
 	EstructuraEstatica* getFondo() override;
 	void update() override;
 	void mostrar() override;
 	void handleDialog(char tecla) override;
+	bool estaCompletado();
+	GameState* cambiarEstado() override;
 	short getAncho() override;
 	short getAlto() override;
 };

@@ -2,6 +2,7 @@
 #include "../../core/GameState.h"
 #include <vector>
 
+class Item;
 class Jugador;
 class IA;
 class EstructuraEstatica;
@@ -14,6 +15,8 @@ protected:
 	std::vector<EstructuraEstatica*> mensajes;
 	Jugador* jugadorEntity;
 	IA* IAEntity;
+	Item* pocion;
+	Item* itemCercano = nullptr;
 	Rect puntoFinal;
 	short indice_mensaje;
 	bool* mostrar_dialogo;
@@ -26,6 +29,9 @@ public:
 	void setJugador(Jugador* jugador);
 	void setIA(IA* ia);
 
+	void intentaRecojer(Jugador*& jugador) override;
+	Item* getItemCercano() override;
+	void setItemCercano(Item* item) override;
 	bool setColisionCondition(char c, EstructuraDinamica*& entity) override;
 	GameState* cambiarEstado() override;
 	bool estaCompletado() override;

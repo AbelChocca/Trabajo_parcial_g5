@@ -26,7 +26,7 @@ void Game::iniciar() {
             currentState->handleInput(this, tecla);
         }
         currentState->renderAnimation();
-        Sleep(100);
+        Sleep(20);
     }
 }
 

@@ -5,6 +5,7 @@
 #include "mundo3_tile_control.h"
 #include "../../Entidad/Jugador.h"
 #include "../../Entidad/IA.h"
+#include "../../pociones/PocionCurativa.h"
 
 Mundo3Escenario1::Mundo3Escenario1(
 	bool* mostrar_dialogo, 
@@ -17,6 +18,7 @@ Mundo3Escenario1::Mundo3Escenario1(
 	this->fondo->loadMap("assets/mundo3_e1.txt", tile_control::E1CharToTile);
 	this->indice_mensaje = 0;
 	this->puntoFinal = { this->fondo->getAncho() - 20, 35, 20, 15};
+	this->pocion = new PocionCurativa(113, 52, 50, 50, this->fondo, "pocion_curativa");
 
 	// Dialogos
 	EstructuraEstatica* dialogo1 = new EstructuraEstatica(25, 40);
@@ -63,6 +65,9 @@ void Mundo3Escenario1::mostrar() {
 	if (this->fondo) {
 		this->fondo->render();
 	}
+	if (this->jugadorEntity) {
+		this->jugadorEntity->getBarraVida().renderizarBarra();
+	}
 	if (!this->mensajes.empty()) this->mostrarDialogo();
 }
 void Mundo3Escenario1::setJugador(Jugador* jugador) {
@@ -77,8 +82,12 @@ void Mundo3Escenario1::mostrarDialogo() {
 
 void Mundo3Escenario1::update() {
 	if (this->fondo) this->fondo->render();
-	if (this->jugadorEntity) this->jugadorEntity->render();
+	if (this->jugadorEntity) {
+		this->jugadorEntity->render();
+		this->jugadorEntity->getBarraVida().renderizarBarra();
+	}
 	if (this->IAEntity) this->IAEntity->render();
+	if (this->pocion) this->pocion->renderItem();
 }
 EstructuraEstatica* Mundo3Escenario1::getFondo() {
 	return this->fondo;
@@ -120,21 +129,70 @@ bool Mundo3Escenario1::setColisionCondition(char c, EstructuraDinamica*& entity)
 	short posX = entity->getPosX();
 	short posY = entity->getPosY();
 
+	short nextX = posX;
+	short nextY = posY;
+
+	switch (c) {
+	case 'd': nextX = posX + 1; break;
+	case 'a': nextX = posX - 1; break;
+	case 'w': nextY = posY - 1; break;
+	case 's': nextY = posY + 1; break;
+	}
+
+
+	if (this->pocion != nullptr) {
+		Entidad* entidad = nullptr;
+		if (entity == this->jugadorEntity->getCuerpo()) {
+			entidad = static_cast<Entidad*>(this->jugadorEntity);
+		}
+		else {
+			entidad = static_cast<Entidad*>(this->IAEntity);
+		}
+
+		if (this->pocion->colision(nextX, nextY, entidad)) {
+			if (entity == this->jugadorEntity->getCuerpo()) {
+				this->itemCercano = this->pocion;
+			}
+			return false;
+		}
+	}
+
+	this->itemCercano = nullptr;
+
 	switch (c)
 	{
 	case 'd':
-		return posX < this->fondo->getAncho() - entity->getAncho();
+		return nextX < this->fondo->getAncho() - entity->getAncho();
 		break;
 	case 'a':
-		return posX >= 1;
+		return nextX >= 1;
 		break;
 	case 'w':
-		return posY > 37;
+		return nextY > 37;
 		break;
 	case 's':
-		return posY < this->fondo->getAlto() - entity->getAlto();
+		return nextY < this->fondo->getAlto() - entity->getAlto();
 		break;
 	}
 
 	return true;
 };
+
+Item* Mundo3Escenario1::getItemCercano() {
+	return this->itemCercano;
+};
+void Mundo3Escenario1::setItemCercano(Item* item) {
+	this->itemCercano = item;
+};
+
+void Mundo3Escenario1::intentaRecojer(Jugador*& jugador) {
+	if (this->itemCercano == nullptr) return;
+	
+	jugador->getInventario().agregarItem(this->itemCercano);
+	this->itemCercano->borrarItem();
+	this->pocion->getDialogo()->borrar();
+	
+	this->itemCercano = nullptr;
+	this->pocion = nullptr;
+	
+}

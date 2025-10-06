@@ -26,7 +26,6 @@ public:
 	Mundo3();
 	~Mundo3();
 
-	void cargarFrame(vector<vector<vector<Tile>>>& sprites, const string& archivo, CharToTileFunc charToTile);
 	void mover(char c);
 	bool esValidoTile(int tx, int ty);
 

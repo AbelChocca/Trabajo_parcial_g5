@@ -1,12 +1,15 @@
 #include "IA.h"
 #include "../levels/level3/mundo3_tile_control.h"
+#include "../ataque/Laser.h"
 #include <queue>
+#include <thread>
 
 
 IA::IA(short x, short y, EstructuraEstatica* fondo) {
     EstructuraDinamica* estructura = new EstructuraDinamica(x, y, fondo);
     estructura->loadMap("assets/ia_sprite1.txt", tile_control::IACharToTile);
     this->cuerpo = estructura;
+    this->tipo = "IA";
 }
 
 IA::~IA() {
@@ -89,4 +92,18 @@ void IA::moverIAhaciaDestino(short destinoX, short destinoY) {
 
         this->cuerpo->render();
     }
+}
+void IA::dispararLaser(Entidad* objetivo) {
+    if (!objetivo) return;
+
+    Laser* nuevoLaser = new Laser(objetivo->getCuerpo()->getFondo(), this,  objetivo);
+
+    // Lanzar thread
+    std::thread([nuevoLaser]() {
+        while (nuevoLaser->estaActivo()) {
+            nuevoLaser->ejecutarAtaque();
+            Sleep(50);
+        }
+        delete nuevoLaser;
+        }).detach();
 }

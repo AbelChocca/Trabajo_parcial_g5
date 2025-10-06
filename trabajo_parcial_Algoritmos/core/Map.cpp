@@ -22,7 +22,7 @@ bool Estructura::loadMap(const std::string& filename, CharToTileFunc charToTile)
    
     std::string line;
     int row = 0;
-
+    
     while (getline(file, line) && row < MAX_HEIGHT) {
         this->ancho = line.size();
         for (int col = 0; col < this->ancho && col < MAX_WIDTH; col++) {

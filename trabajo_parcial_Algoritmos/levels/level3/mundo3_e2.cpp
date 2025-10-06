@@ -4,6 +4,8 @@
 #include "../../enemigo/enemigo.h"
 #include "../../Entidad/Jugador.h"
 #include "../../Entidad/IA.h"
+#include "../../armas/PistolaLaser.h"
+#include "mundo3_e3.h"
 
 Mundo3Escenario2::Mundo3Escenario2(
 	bool* mostrar_dialogo, 
@@ -17,9 +19,12 @@ Mundo3Escenario2::Mundo3Escenario2(
 	this->mostrar_dialogo = mostrar_dialogo;
 	this->guardarIA = guardarIA;
 	this->primerPunto = {35, 35, 115, 2};
+	this->puntoFinal = { 135, 60, 15, 14 };
 
 	this->fondo = new EstructuraEstatica(0,0);
 	this->fondo->loadMap("assets/mundo3_e2.txt", tile_control::E2CharToTile);
+
+	this->pistola = new PistolaLaser(10, 65, 55, 67, this->fondo, "pistola_laser");
 
 	EstructuraEstatica* mensaje1 = new EstructuraEstatica(40, 60);
 	EstructuraEstatica* mensaje2 = new EstructuraEstatica(40, 60);
@@ -30,14 +35,14 @@ Mundo3Escenario2::Mundo3Escenario2(
 	this->mensajes.push_back(mensaje1);
 	this->mensajes.push_back(mensaje2);
 
-	EstructuraDinamica* enemigo_e1 = new EstructuraDinamica(60, 36, this->fondo);
-	EstructuraDinamica* enemigo_e2 = new EstructuraDinamica(70, 49, this->fondo);
+	EstructuraDinamica* enemigo_e1 = new EstructuraDinamica(40, 36, this->fondo);
+	EstructuraDinamica* enemigo_e2 = new EstructuraDinamica(100, 49, this->fondo);
 
 	enemigo_e1->loadMap("assets/enemigo.txt", tile_control::ECharToTile);
 	enemigo_e2->loadMap("assets/enemigo.txt", tile_control::ECharToTile);
 
-	Enemigo* enemigo1 = new Enemigo(enemigo_e1);
-	Enemigo* enemigo2 = new Enemigo(enemigo_e2);
+	Enemigo* enemigo1 = new Enemigo(enemigo_e1, 10);
+	Enemigo* enemigo2 = new Enemigo(enemigo_e2, 10);
 
 	this->enemigos.push_back(enemigo1);
 	this->enemigos.push_back(enemigo2);
@@ -63,14 +68,19 @@ EstructuraEstatica* Mundo3Escenario2::getFondo() {
 void Mundo3Escenario2::update() {
 	if (this->fondo) this->fondo->render();
 	if (this->jugadorEntity) this->jugadorEntity->render();
-	if (this->IAEntity) this->IAEntity->render();
+	if (this->IAEntity && !this->guardarIA) this->IAEntity->render();
+	if (this->pistola) this->pistola->renderItem();
 };
 void Mundo3Escenario2::mostrar() {
 	Console::Clear();
 	if (this->fondo) this->fondo->render();
-	if (this->jugadorEntity) this->jugadorEntity->render();
-	if (this->IAEntity) this->IAEntity->render();
+	if (this->jugadorEntity) {
+		this->jugadorEntity->render();
+		this->jugadorEntity->getInventario().renderItems();
+	}
+	if (this->IAEntity && !this->guardarIA) this->IAEntity->render();
 	if (this->mostrar_dialogo) this->mostrarDialogo();
+	if (this->pistola) this->pistola->renderItem();
 };
 void Mundo3Escenario2::handleDialog(char tecla) {
 	if (tecla == 13 && this->dialogo_activo) {
@@ -84,6 +94,7 @@ void Mundo3Escenario2::handleDialog(char tecla) {
 	}
 };
 void Mundo3Escenario2::renderAnimation() {
+	if (this->jugadorEntity->getInventario().getItemEquipado() != nullptr)this->jugadorEntity->getInventario().getItemEquipado()->usarItem(this->jugadorEntity);
 	for (Enemigo*& enemigo : this->enemigos) {
 		EstructuraDinamica* estructura = enemigo->getEstructura();
 		estructura->borrar();
@@ -95,10 +106,31 @@ void Mundo3Escenario2::renderAnimation() {
 			this->IAEntity->getCuerpo()->borrar();
 			this->mandarAlInicio();
 			// Quitar vida al jugador
+			this->jugadorEntity->getBarraVida().actualizarBarra(enemigo->getDaño());
+
+			this->jugadorEntity->render();
+			if (!this->guardarIA) this->IAEntity->render();
 		}
 
 		estructura->render();
 	}
+}
+bool Mundo3Escenario2::estaCompletado() {
+	short& jx = this->jugadorEntity->getCuerpo()->getPosX();
+	short& jy = this->jugadorEntity->getCuerpo()->getPosY();
+	short& jw = this->jugadorEntity->getCuerpo()->getAncho();
+	short& jh = this->jugadorEntity->getCuerpo()->getAlto(); 
+
+	return (
+		jx + jw >= this->puntoFinal.x &&
+		jx <= this->puntoFinal.x + this->puntoFinal.ancho &&
+		jy + jh >= this->puntoFinal.y &&
+		jy <= this->puntoFinal.y + this->puntoFinal.alto
+		);
+}
+
+GameState* Mundo3Escenario2::cambiarEstado() {
+	return new Mundo3Escenario3(this->mostrar_dialogo, this->guardarIA, this->jugadorEntity, this->IAEntity);
 }
 void Mundo3Escenario2::mandarAlInicio() {
 	this->jugadorEntity->getCuerpo()->setPosX(5);
@@ -128,6 +160,38 @@ bool Mundo3Escenario2::setColisionCondition(char c, EstructuraDinamica*& entity)
 	short posX = entity->getPosX();
 	short posY = entity->getPosY();
 	Tile** grafico = this->fondo->getGrafico();
+
+	short nextX = posX;
+	short nextY = posY;
+
+	switch (c) {
+	case 'd': nextX = posX + 1; break;
+	case 'a': nextX = posX - 1; break;
+	case 'w': nextY = posY - 1; break;
+	case 's': nextY = posY + 1; break;
+	}
+
+
+	if (this->pistola != nullptr) {
+		Entidad* entidad = nullptr;
+		if (entity == this->jugadorEntity->getCuerpo()) {
+			entidad = static_cast<Entidad*>(this->jugadorEntity);
+		}
+		else {
+			entidad = static_cast<Entidad*>(this->IAEntity);
+		}
+
+		if (this->pistola->colision(nextX, nextY, entidad)) {
+			if (entity == this->jugadorEntity->getCuerpo()) {
+				this->itemCercano = this->pistola;
+			}
+			return false;
+		}
+	}
+
+
+	this->itemCercano = nullptr;
+
 	switch (c)
 	{
 	case 'd':
@@ -175,3 +239,22 @@ short Mundo3Escenario2::getAncho() {
 short Mundo3Escenario2::getAlto() {
 	return this->fondo->getAlto();
 };
+
+Item* Mundo3Escenario2::getItemCercano() {
+	return this->itemCercano;
+};
+void Mundo3Escenario2::setItemCercano(Item* item) {
+	this->itemCercano = item;
+};
+
+void Mundo3Escenario2::intentaRecojer(Jugador*& jugador) {
+	if (this->itemCercano == nullptr) return;
+
+	jugador->getInventario().agregarItem(this->itemCercano);
+	this->itemCercano->borrarItem();
+	this->pistola->getDialogo()->borrar();
+
+	this->itemCercano = nullptr;
+	this->pistola = nullptr;
+
+}

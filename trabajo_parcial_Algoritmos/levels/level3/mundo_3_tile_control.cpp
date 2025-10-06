@@ -41,6 +41,10 @@ namespace tile_control {
 			t.bloque = L'░';
 			t.color = ConsoleColor::Black;
 			break;
+		case ' ':
+			t.bloque = L' ';
+			t.color = ConsoleColor::Black;
+			break;
 		default:
 			t.bloque = c;
 			t.color = ConsoleColor::Black;
@@ -275,6 +279,225 @@ namespace tile_control {
 		case ' ':
 			t.bloque = L' ';
 			t.color = ConsoleColor::Black;
+			break;
+		default:
+			t.bloque = c;
+			t.color = ConsoleColor::White;
+			break;
+		}
+		return t;
+	}
+
+	Tile PCurativaCharToTile(char c) {
+		Tile t;
+		t.isSolid = true;
+		switch (c)
+		{
+		case '*':
+			t.bloque = L'█';
+			t.color = ConsoleColor::White;
+			break;
+		case '1':
+			t.bloque = L'█';
+			t.color = ConsoleColor::DarkYellow;
+			break;
+		case '2':
+			t.bloque = L'█';
+			t.color = ConsoleColor::Green;
+			break;
+		case ' ':
+			t.bloque = L' ';
+			t.color = ConsoleColor::Black;
+			break;
+		default:
+			t.bloque = c;
+			t.color = ConsoleColor::White;
+			break;
+		}
+
+		return t;
+	}
+	Tile ItemDialogoCharToTile(char c) {
+		Tile t;
+		switch (c)
+		{
+		case '*':
+			t.bloque = L'█';
+			t.color = ConsoleColor::White;
+			break;
+		case '#':
+			t.bloque = L'█';
+			t.color = ConsoleColor::DarkYellow;
+			break;
+		case '1':
+			t.bloque = L'█';
+			t.color = ConsoleColor::Black;
+			break;
+		default:
+			t.bloque = c;
+			t.color = ConsoleColor::White;
+			break;
+		}
+
+		return t;
+	}
+	Tile PistolaLaserCharToTile(char c) {
+		Tile t;
+		t.isSolid = true;
+		switch (c)
+		{
+		case '*':
+			t.bloque = L'█';
+			t.color = ConsoleColor::White;
+			break;
+		case '1':
+			t.bloque = L'█';
+			t.color = ConsoleColor::DarkGray;
+			break;
+		case '.':
+			t.bloque = L'█';
+			t.color = ConsoleColor::Gray;
+			break;
+		case '2':
+			t.bloque = L'█';
+			t.color = ConsoleColor::DarkCyan;
+			break;
+		case '3':
+			t.bloque = L'█';
+			t.color = ConsoleColor::DarkBlue;
+			break;
+		case ' ':
+			t.bloque = L' ';
+			t.color = ConsoleColor::Black;
+			break;
+		default:
+			t.bloque = c;
+			t.color = ConsoleColor::White;
+			break;
+		}
+
+		return t;
+	}
+	Tile JugadorConPistolaLaserCharToTile(char c) {
+		Tile t;
+		switch (c)
+		{
+		case '*':
+			t.bloque = L'▒';
+			t.color = ConsoleColor::DarkYellow;
+			break;
+		case '#':
+			t.bloque = L'▓';
+			t.color = ConsoleColor::Yellow;
+			break;
+		case '0':
+			t.bloque = L'█';
+			t.color = ConsoleColor::White;
+			break;
+		case '1':
+			t.bloque = L'░';
+			t.color = ConsoleColor::Black;
+			break;
+		case '2':
+			t.bloque = L'░';
+			t.color = ConsoleColor::DarkGray;
+			break;
+		case '3':
+			t.bloque = L'▒';
+			t.color = ConsoleColor::Gray;
+			break;
+		case '4':
+			t.bloque = L'░';
+			t.color = ConsoleColor::DarkBlue;
+			break;
+		case '.':
+			t.bloque = L'░';
+			t.color = ConsoleColor::Black;
+			break;
+		case '5':
+			t.bloque = L'█';
+			t.color = ConsoleColor::Gray;
+			break;
+		case '7':
+			t.bloque = L'█';
+			t.color = ConsoleColor::DarkBlue;
+			break;
+		case '6':
+			t.bloque = L'█';
+			t.color = ConsoleColor::DarkCyan;
+			break;
+		case ' ':
+			t.bloque = L' ';
+			t.color = ConsoleColor::Black;
+			break;
+		default:
+			t.bloque = c;
+			t.color = ConsoleColor::Black;
+			break;
+		}
+		return t;
+	}
+	Tile E3CharTotTile(char c) {
+		Tile t;
+		switch (c)
+		{
+		case '*':
+		case '#':
+			t.bloque = L'█';
+			t.color = ConsoleColor::Gray;
+			t.isSolid = false;
+			break;
+		case '3':
+			t.bloque = L'█';
+			t.color = ConsoleColor::DarkRed;
+			t.isSolid = true;
+			break;
+		case '1':
+			t.bloque = L'█';
+			t.color = ConsoleColor::DarkYellow;
+			t.isSolid = false;
+			break;
+		case '2':
+			t.bloque = L'█';
+			t.color = ConsoleColor::DarkGreen;
+			t.isSolid = false;
+			break;
+		case ' ':
+			t.bloque = L'█';
+			t.color = ConsoleColor::DarkBlue;
+			t.isSolid = true;
+			break;
+		default:
+			t.bloque = c;
+			t.color = ConsoleColor::White;
+			break;
+		}
+		return t;
+	}
+	Tile JefeCharToTile(char c) {
+		Tile t;
+		switch (c)
+		{
+		case '*':
+			t.bloque = L'█';
+			t.color = ConsoleColor::DarkRed;
+			break;
+		case '#':
+			t.bloque = L'█';
+			t.color = ConsoleColor::White;
+			break;
+		case '1':
+		case '5':
+			t.bloque = L'█';
+			t.color = ConsoleColor::DarkGray;
+			break;
+		case '2':
+			t.bloque = L'█';
+			t.color = ConsoleColor::Black;
+			break;
+		case ' ':
+			t.bloque = L'█';
+			t.color = ConsoleColor::DarkBlue;
 			break;
 		default:
 			t.bloque = c;
