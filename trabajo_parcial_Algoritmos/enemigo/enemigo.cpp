@@ -1,32 +1,33 @@
 #include "enemigo.h"
 #include "../core/Map.h"
 
-Enemigo::Enemigo(EstructuraDinamica* cuerpo)
+Enemigo::Enemigo(EstructuraDinamica* cuerpo, short daño)
 {
+    this->daño = daño;
 	this->dx = 2;
 	this->dy = 1;
-	this->estructura = cuerpo;
+	this->cuerpo = cuerpo;
 }
 
 Enemigo::~Enemigo()
 {
-	delete this->estructura;
+	delete this->cuerpo;
 }
 void Enemigo::atacar() {
 
 }
 
 bool Enemigo::detectarColision(EstructuraDinamica* entidad) {
-    short posX = this->estructura->getPosX();
-    short posY = this->estructura->getPosY();
-    short ancho = this->estructura->getAncho();
-    short alto = this->estructura->getAlto();
+    short posX = this->cuerpo->getPosX();
+    short posY = this->cuerpo->getPosY();
+    short ancho = this->cuerpo->getAncho();
+    short alto = this->cuerpo->getAlto();
 
     short entePosX = entidad->getPosX();
     short entePosY = entidad->getPosY();
     short enteAncho = entidad->getAncho();
     short enteAlto = entidad->getAlto();
-    Tile** grafico = this->estructura->getFondo()->getGrafico();
+    Tile** grafico = this->cuerpo->getFondo()->getGrafico();
     
     if ((entePosX < posX + ancho) &&
         (entePosX + enteAncho > posX) &&

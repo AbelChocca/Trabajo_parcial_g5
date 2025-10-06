@@ -22,10 +22,10 @@ public:
     void render();
     virtual void borrar() = 0;
 
-    short getPosX() const { return this->posX; };
-    short getPosY() const { return this->posY; };
-    short getAlto() const { return this->alto; };
-    short getAncho() const { return this->ancho; };
+    short& getPosX() { return this->posX; };
+    short& getPosY() { return this->posY; };
+    short& getAlto() { return this->alto; };
+    short& getAncho()  { return this->ancho; };
     Tile** getGrafico() const { return this->grafico; };
 
     void setPosY(short y) { this->posY = y; };
@@ -82,14 +82,16 @@ public:
     }
 
     void setSprite(const std::vector<std::vector<Tile>>& frame) {
+        size_t nuevoAlto = frame.size();
+        size_t nuevoAncho = frame[0].size();
 
         if (this->grafico) {
-            for (int i = 0; i < this->alto; i++) {
-                delete[] this->grafico[i];
-            }
+            for (int i = 0; i < this->alto; i++) delete[] this->grafico[i];
             delete[] this->grafico;
         }
 
+        this->alto = nuevoAlto;
+        this->ancho = nuevoAncho;
 
         this->grafico = new Tile * [alto];
         for (int i = 0; i < alto; i++) {
@@ -99,7 +101,5 @@ public:
             }
         }
     }
-
-
 };
 

@@ -1,6 +1,7 @@
 ﻿#include "Selector.h"
 #include "../core/Game.h"
 #include "../levels/level3/mundo3.h"
+#include "../levels/level2/Mundo1.h"
 
 Tile SelectorCharToTile(char c);
 Tile InputSelectorCharToTile(char c);
@@ -46,9 +47,9 @@ void Selector::handleInput(Game* game, char tecla) {
 		switch (this->selectedOption)
 		{
 		case 0:
+			game->setState(new Mundo1());
 			break;
 		case 1:
-
 			break;
 		case 2:
 			game->setState(new Mundo3());

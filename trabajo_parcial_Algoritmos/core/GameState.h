@@ -3,6 +3,8 @@
 class Game;
 class EstructuraEstatica;
 class EstructuraDinamica;
+class Item;
+class Jugador;
 
 struct Rect {
     int x, y;
@@ -22,6 +24,13 @@ public:
     virtual void renderAnimation() {
         return;
     };
+    virtual Item* getItemCercano() {
+        return nullptr;
+    }
+    virtual void setItemCercano(Item* item) {
+        return;
+    }
+    virtual void intentaRecojer(Jugador*& jugador) {};
     virtual bool estaCompletado() {
         return false;
     };

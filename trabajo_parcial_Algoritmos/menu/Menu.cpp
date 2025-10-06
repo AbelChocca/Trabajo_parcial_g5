@@ -1,6 +1,7 @@
 ﻿#include "../core/Game.h"
 #include <conio.h>
 #include "../selector/Selector.h"
+#include "../instrucciones/Instrucciones.h"
 
 Tile MenuCharToTile(char c);
 Tile InputCharToTile(char c);
@@ -55,6 +56,9 @@ void Menu::handleInput(Game* game, char c) {
         if (this->getOpcion() == 0) {
             game->setState(new Selector());
             return;
+        }
+        else if (this->getOpcion() == 1) {
+            game->setState(new Instrucciones());
         }
     }
     this->getInput()->render();
